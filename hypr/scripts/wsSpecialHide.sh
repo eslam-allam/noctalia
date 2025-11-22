@@ -35,18 +35,18 @@ for workspace in $workspaces; do
       continue
     fi
     workspace=${workspace#"special:"}
-    if ! caelestia toggle "$workspace" >/dev/null; then
-      caelestia shell toaster error 'Workspace Toggle' "Failed to toggle workspace $workspace" ''
+    if ! ./toggleWorkspace.sh "$workspace" >/dev/null; then
+      notify-send -u critical -a 'Workspace Toggle' "Failed to toggle workspace $workspace" ''
       exit 1
     fi
 
     if [[ "$workspaceMonitor" != "$currentMonitor" ]]; then
       if ! caelestia toggle "$workspace" >/dev/null; then
-        caelestia shell toaster error 'Workspace Toggle' "Failed to toggle workspace $workspace" ''
+        notify-send -u critical -a 'Workspace Toggle' "Failed to toggle workspace $workspace" ''
         exit 1
       fi
     fi
   fi
 done
 
-caelestia shell toaster info 'Workspace Toggle' "Toggled all workspaces successfully" ''
+notify-send -a 'Workspace Toggle' "Toggled all workspaces successfully" ''
