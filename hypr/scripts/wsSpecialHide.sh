@@ -35,7 +35,7 @@ for workspace in $workspaces; do
       continue
     fi
     workspace=${workspace#"special:"}
-    if ! ./toggleWorkspace.sh "$workspace" >/dev/null; then
+    if ! "$(dirname "$0")/toggleWorkspace.sh" "$workspace" >/dev/null; then
       notify-send -u critical -a 'Workspace Toggle' "Failed to toggle workspace $workspace" ''
       exit 1
     fi
