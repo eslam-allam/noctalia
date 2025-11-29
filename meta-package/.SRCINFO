@@ -1,0 +1,24 @@
+pkgbase = noctalia-meta
+	pkgdesc = A meta package that depends on several packages for the Noctalia setup.
+	pkgver = 1.0
+	pkgrel = 1
+	url = https://docs.noctalia.dev/docs/
+	arch = any
+	license = custom:meta
+	depends = ddcutil
+	depends = eza
+	depends = fish
+	depends = hyprpicker
+	depends = hyprshot
+	depends = swappy
+	depends = i2c-tools
+	depends = starship
+	depends = ttf-jetbrains-mono-nerd
+	depends = xdg-desktop-portal-hyprland
+	depends = xdg-desktop-portal-hyprland
+	depends = xdg-desktop-portal-gtk
+	depends = adw-gtk-theme
+	depends = noctalia-shell
+	provides = noctalia-meta
+
+pkgname = noctalia-meta

@@ -27,10 +27,26 @@ function connect {
 
 }
 
-if ! connect hypr; then
+meta_directory='meta-package'
+targets=('hypr' 'rofi')
+
+if ! pushd "$meta_directory" &>/dev/null; then
+  echo "Failed to change to meta directory $meta_directory"
+  exit 1
+fi
+if ! makepkg --si -f --nosign -i; then
+  echo 'Failed to install meta package'
+  exit 1
+fi
+if ! popd &>/dev/null; then
+  echo "Failed to return to original directory after meta installation $meta_directory"
   exit 1
 fi
 
-if ! connect rofi; then
-  exit 1
-fi
+for target in "${targets[@]}"; do
+  if ! connect "$target"; then
+    exit 1
+  fi
+done
+
+echo 'Done...'
