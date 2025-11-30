@@ -5,6 +5,7 @@ pkgbase = noctalia-meta
 	url = https://docs.noctalia.dev/docs/
 	arch = any
 	license = custom:meta
+	depends = app2unit
 	depends = ddcutil
 	depends = eza
 	depends = fish
@@ -19,6 +20,8 @@ pkgbase = noctalia-meta
 	depends = xdg-desktop-portal-gtk
 	depends = adw-gtk-theme
 	depends = noctalia-shell
+	depends = matugen
+	depends = polkit-gnome
 	provides = noctalia-meta
 
 pkgname = noctalia-meta
