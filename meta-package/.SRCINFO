@@ -1,6 +1,6 @@
 pkgbase = noctalia-meta
 	pkgdesc = A meta package that depends on several packages for the Noctalia setup.
-	pkgver = 1.0
+	pkgver = 1.1
 	pkgrel = 1
 	url = https://docs.noctalia.dev/docs/
 	arch = any
@@ -22,6 +22,7 @@ pkgbase = noctalia-meta
 	depends = noctalia-shell
 	depends = matugen
 	depends = polkit-gnome
+	depends = rofi-rbw
 	provides = noctalia-meta
 
 pkgname = noctalia-meta

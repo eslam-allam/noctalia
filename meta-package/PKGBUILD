@@ -1,12 +1,31 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.0
+pkgver=1.1
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
 url="https://docs.noctalia.dev/docs/"
 license=('custom:meta')
-depends=('app2unit' 'ddcutil' 'eza' 'fish' 'hyprpicker' 'hyprshot' 'swappy' 'i2c-tools' 'starship' 'ttf-jetbrains-mono-nerd' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'adw-gtk-theme' 'noctalia-shell' 'matugen' 'polkit-gnome') # Add your dependencies here
+depends=(
+  'app2unit'
+  'ddcutil'
+  'eza'
+  'fish'
+  'hyprpicker'
+  'hyprshot'
+  'swappy'
+  'i2c-tools'
+  'starship'
+  'ttf-jetbrains-mono-nerd'
+  'xdg-desktop-portal-hyprland'
+  'xdg-desktop-portal-hyprland'
+  'xdg-desktop-portal-gtk'
+  'adw-gtk-theme'
+  'noctalia-shell'
+  'matugen'
+  'polkit-gnome'
+  'rofi-rbw'
+  ) # Add your dependencies here
 makedepends=()
 provides=("${pkgname}")
 conflicts=()
