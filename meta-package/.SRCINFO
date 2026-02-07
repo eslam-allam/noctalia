@@ -1,6 +1,6 @@
 pkgbase = noctalia-meta
 	pkgdesc = A meta package that depends on several packages for the Noctalia setup.
-	pkgver = 1.2
+	pkgver = 1.3
 	pkgrel = 1
 	url = https://docs.noctalia.dev/docs/
 	arch = any
@@ -16,8 +16,7 @@ pkgbase = noctalia-meta
 	depends = eza
 	depends = fish
 	depends = hyprpicker
-	depends = hyprshot
-	depends = satty
+	depends = hyprquickframe
 	depends = pamac
 	depends = wayscriber-bin
 	depends = wayscriber-configurator
