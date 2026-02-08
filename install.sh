@@ -34,7 +34,7 @@ if ! pushd "$meta_directory" &>/dev/null; then
   echo "Failed to change to meta directory $meta_directory"
   exit 1
 fi
-if ! makepkg --si -f --nosign -i; then
+if ! yay -B -i .; then
   echo 'Failed to install meta package'
   exit 1
 fi
