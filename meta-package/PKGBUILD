@@ -1,6 +1,6 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.3
+pkgver=1.4
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
@@ -8,6 +8,7 @@ url="https://docs.noctalia.dev/docs/"
 license=('custom:meta')
 depends=(
   'hyprland'
+  'nautilus'
   'uwsm'
   'app2unit'
   'gnome-system-monitor'
