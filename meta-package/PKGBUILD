@@ -1,6 +1,6 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.6
+pkgver=1.7
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
@@ -44,6 +44,7 @@ depends=(
   'rofi-rbw'
   'nwg-look'
   'monique'
+  'ghostty'
   ) # Add your dependencies here
 makedepends=()
 provides=("${pkgname}")
