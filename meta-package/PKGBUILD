@@ -1,6 +1,6 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.8
+pkgver=1.9
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
@@ -46,6 +46,7 @@ depends=(
   'monique'
   'ghostty'
   'vivaldi'
+  'quickshell-overview-git'
   ) # Add your dependencies here
 makedepends=()
 provides=("${pkgname}")

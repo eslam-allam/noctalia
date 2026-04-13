@@ -1,6 +1,6 @@
 pkgbase = noctalia-meta
 	pkgdesc = A meta package that depends on several packages for the Noctalia setup.
-	pkgver = 1.8
+	pkgver = 1.9
 	pkgrel = 1
 	url = https://docs.noctalia.dev/docs/
 	arch = any
@@ -44,6 +44,7 @@ pkgbase = noctalia-meta
 	depends = monique
 	depends = ghostty
 	depends = vivaldi
+	depends = quickshell-overview-git
 	provides = noctalia-meta
 
 pkgname = noctalia-meta
