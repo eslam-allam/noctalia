@@ -1,3 +1,5 @@
+#:schema ./plugins.schema.json
+
 enabled = true
 
 [[plugins]]

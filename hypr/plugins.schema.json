@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Hyprland Plugins Manifest",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Global toggle for all plugins."
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "enabled"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the plugin."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The Git URL for the plugin repository."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Toggle for this specific plugin."
+          }
+        }
+      }
+    }
+  },
+  "required": ["enabled", "plugins"]
+}
