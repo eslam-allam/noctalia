@@ -1,0 +1,3 @@
+[submodule "meta-package"]
+	path = meta-package
+	url = https://github.com/eslam-allam/noctalia-meta.git
