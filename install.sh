@@ -92,7 +92,7 @@ if ! pushd "$meta_directory" &>/dev/null; then
   echo "Failed to change to meta directory $meta_directory"
   exit 1
 fi
-if ! yay -B -i .; then
+if ! yay -B -i --needed .; then
   echo 'Failed to install meta package'
   exit 1
 fi
