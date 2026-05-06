@@ -1,6 +1,6 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.12
+pkgver=1.13
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
@@ -44,7 +44,7 @@ depends=(
   'monique'
   'ghostty'
   'helium-browser-bin'
-  'quickshell-overview-git'
+  'toml-cli'
   ) # Add your dependencies here
 makedepends=()
 provides=("${pkgname}")
