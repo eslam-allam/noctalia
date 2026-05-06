@@ -162,11 +162,10 @@ while read -r name url enabled; do
         continue 
       fi
       echo "Plugin $name installed successfully"
+      installedPlugins+=("$name")
     else
       echo "Plugin $name already installed.."
     fi 
-    
-    installedPlugins+=("$name")
 
     echo "Enabling plugin $name..."
     if ! hyprpm enable "$name"; then
