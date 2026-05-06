@@ -130,6 +130,7 @@ echo "Found Plugins: $plugins"
 installedPlugins=()
 failedPlugins=()
 enabledPlugins=()
+disabledPlugins=()
 failedToEnablePlugins=()
 
 echo "Updating hyprpm..."
@@ -146,7 +147,10 @@ while read -r name url enabled; do
     
     if [[ "$enabled" == "false" ]]; then
         echo "  -> This plugin is inactive. Disabling if installed..."
-        hyprpm disable "$name"
+        if hyprpm list | grep -q "$name"; then
+          hyprpm disable "$name"
+        fi
+        disabledPlugins+=("$name")
         continue 
     fi
     echo "  -> This plugin is active."
@@ -206,7 +210,15 @@ if [[ ${#enabledPlugins[@]} -gt 0 ]]; then
     done
 fi
 
-# 4. Failed to Enable
+# 4. Enabled Plugins
+if [[ ${#disabledPlugins[@]} -gt 0 ]]; then
+    echo "⏸  Successfully Disabled:"
+    for plugin in "${disabledPlugins[@]}"; do
+        echo "   - $plugin"
+    done
+fi
+
+# 5. Failed to Enable
 if [[ ${#failedToEnablePlugins[@]} -gt 0 ]]; then
     echo "⚠️  Failed to Enable (Installed but inactive):"
     for plugin in "${failedToEnablePlugins[@]}"; do
