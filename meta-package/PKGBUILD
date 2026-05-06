@@ -1,6 +1,6 @@
 # Maintainer: Eslam Allam <eslamallam73@gmail.com>
 pkgname=noctalia-meta
-pkgver=1.10
+pkgver=1.11
 pkgrel=1
 pkgdesc="A meta package that depends on several packages for the Noctalia setup."
 arch=('any')
@@ -11,9 +11,7 @@ depends=(
   'nautilus'
   'uwsm'
   'app2unit'
-  'gnome-system-monitor'
   'ferdium'
-  'better-control'
   'ddcutil'
   'hyprpicker'
   'eza'
