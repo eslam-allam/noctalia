@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+echo "Updating submodules..."
+if ! git submodule update --init --recursive; then
+  echo "Failed to update submodules!"
+  exit 1
+fi
+echo "Submodules Updated successfully"
+
 baseTarget="$HOME/.config"
 
 hyprPluginsManifest="./hypr/plugins.toml"
