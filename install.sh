@@ -241,6 +241,8 @@ function printPluginsStatus {
   fi
 
   echo "-------------------------------"
+  hyprpm list
+  echo "-------------------------------"
 }
 
 
