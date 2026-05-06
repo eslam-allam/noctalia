@@ -1,0 +1,6 @@
+enabled = true
+
+[[plugins]]
+name = "scrolloverview"
+url = "https://github.com/yayuuu/hyprland-scroll-overview.git"
+enabled = true
