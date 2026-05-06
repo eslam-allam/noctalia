@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-baseTarget="$HOME/.config"
-meta_directory='meta-package'
-targets=('hypr' 'rofi')
+BASE_TARGET="$HOME/.config"
+META_DIRECTORY='meta-package'
+TARGETS=('hypr' 'rofi')
 
-hyprPluginsManifest="./hypr/plugins.toml"
+HYPR_PLUGINS_MANIFEST="./hypr/plugins.toml"
 
-installedPlugins=()
-failedPlugins=()
-enabledPlugins=()
-disabledPlugins=()
-failedToEnablePlugins=()
+INSTALLED_PLUGINS=()
+FAILED_PLUGINS=()
+ENABLED_PLUGINS=()
+DISABLED_PLUGINS=()
+FAILED_TO_ENABLE_PLUGINS=()
 
 function checkHyprlandPluginsDeps {
   if ! command -v hyprpm &>/dev/null; then
@@ -23,8 +23,8 @@ function checkHyprlandPluginsDeps {
     return 1
   fi
 
-  if [[ ! -f "$hyprPluginsManifest" ]]; then
-    echo "hyprPluginsManifest not found in '$hyprPluginsManifest'" >&2
+  if [[ ! -f "$HYPR_PLUGINS_MANIFEST" ]]; then
+    echo "hyprPluginsManifest not found in '$HYPR_PLUGINS_MANIFEST'" >&2
     return 1
   fi
 
@@ -36,7 +36,7 @@ function hyprlandPluginsEnabled {
     return 1
   fi
   local result
-  result="$(toml-cli get "$hyprPluginsManifest" enabled)"
+  result="$(toml-cli get "$HYPR_PLUGINS_MANIFEST" enabled)"
   if [[ -z "$result" ]]; then
     echo "false"
     return 0
@@ -52,9 +52,9 @@ function getHyprlandPlugins {
   fi
 
   local result
-  result="$(toml-cli get "$hyprPluginsManifest" plugins)"
+  result="$(toml-cli get "$HYPR_PLUGINS_MANIFEST" plugins)"
   if [[ -z "$result" ]]; then
-    echo "Failed to get plugins from $hyprPluginsManifest" >&2
+    echo "Failed to get plugins from $HYPR_PLUGINS_MANIFEST" >&2
     return 1
   fi
 
@@ -63,7 +63,7 @@ function getHyprlandPlugins {
 
 function connect {
   component="$1"
-  target="$baseTarget/$component"
+  target="$BASE_TARGET/$component"
   backup="$target.$(date +%Y%m%d).bak"
 
   link_source="$PWD/$component"
@@ -89,8 +89,8 @@ function connect {
 function installMeta {
   echo "Installing meta package..."
 
-  if ! pushd "$meta_directory" &>/dev/null; then
-    echo "Failed to change to meta directory $meta_directory"
+  if ! pushd "$META_DIRECTORY" &>/dev/null; then
+    echo "Failed to change to meta directory $META_DIRECTORY"
     exit 1
   fi
   if ! yay -B -i --needed .; then
@@ -98,7 +98,7 @@ function installMeta {
     exit 1
   fi
   if ! popd &>/dev/null; then
-    echo "Failed to return to original directory after meta installation $meta_directory"
+    echo "Failed to return to original directory after meta installation $META_DIRECTORY"
     exit 1
   fi
 
@@ -107,7 +107,7 @@ function installMeta {
 function linkTargets {
   echo "Linking targets..."
 
-  for target in "${targets[@]}"; do
+  for target in "${TARGETS[@]}"; do
     if ! connect "$target"; then
       exit 1
     fi
@@ -156,7 +156,7 @@ function installHyprlandPlugins {
       if hyprpm list | grep -q "$name"; then
         hyprpm disable "$name"
       fi
-      disabledPlugins+=("$name")
+      DISABLED_PLUGINS+=("$name")
       continue
     fi
     echo "  -> This plugin is active."
@@ -164,11 +164,11 @@ function installHyprlandPlugins {
       echo "Plugin $name not installed. Installing..."
       if ! hyprpm add "$url"; then
         echo "Failed to install plugin $name"
-        failedPlugins+=("$name")
+        FAILED_PLUGINS+=("$name")
         continue
       fi
       echo "Plugin $name installed successfully"
-      installedPlugins+=("$name")
+      INSTALLED_PLUGINS+=("$name")
     else
       echo "Plugin $name already installed.."
     fi
@@ -176,10 +176,10 @@ function installHyprlandPlugins {
     echo "Enabling plugin $name..."
     if ! hyprpm enable "$name"; then
       echo "Failed to enable $name"
-      failedToEnablePlugins+=("$name")
+      FAILED_TO_ENABLE_PLUGINS+=("$name")
       continue
     fi
-    enabledPlugins+=("$name")
+    ENABLED_PLUGINS+=("$name")
   done < <(echo "$plugins" | jq -r '.[] | "\(.name) \(.url) \(.enabled)"')
 
   echo "Reloading hyprpm"
@@ -194,47 +194,47 @@ function installHyprlandPlugins {
 function printPluginsStatus {
   echo -e "\n--- Hyprland Plugin Summary ---"
   # 1. Successful Installations
-  if [[ ${#installedPlugins[@]} -gt 0 ]]; then
+  if [[ ${#INSTALLED_PLUGINS[@]} -gt 0 ]]; then
     echo "✅ Successfully Installed:"
-    for plugin in "${installedPlugins[@]}"; do
+    for plugin in "${INSTALLED_PLUGINS[@]}"; do
       echo "   - $plugin"
     done
   fi
 
   # 2. Failed Installations
-  if [[ ${#failedPlugins[@]} -gt 0 ]]; then
+  if [[ ${#FAILED_PLUGINS[@]} -gt 0 ]]; then
     echo "❌ Failed to Install:"
-    for plugin in "${failedPlugins[@]}"; do
+    for plugin in "${FAILED_PLUGINS[@]}"; do
       echo "   - $plugin"
     done
   fi
 
   # 3. Enabled Plugins
-  if [[ ${#enabledPlugins[@]} -gt 0 ]]; then
+  if [[ ${#ENABLED_PLUGINS[@]} -gt 0 ]]; then
     echo "▶️  Successfully Enabled:"
-    for plugin in "${enabledPlugins[@]}"; do
+    for plugin in "${ENABLED_PLUGINS[@]}"; do
       echo "   - $plugin"
     done
   fi
 
   # 4. Enabled Plugins
-  if [[ ${#disabledPlugins[@]} -gt 0 ]]; then
+  if [[ ${#DISABLED_PLUGINS[@]} -gt 0 ]]; then
     echo "⏸  Successfully Disabled:"
-    for plugin in "${disabledPlugins[@]}"; do
+    for plugin in "${DISABLED_PLUGINS[@]}"; do
       echo "   - $plugin"
     done
   fi
 
   # 5. Failed to Enable
-  if [[ ${#failedToEnablePlugins[@]} -gt 0 ]]; then
+  if [[ ${#FAILED_TO_ENABLE_PLUGINS[@]} -gt 0 ]]; then
     echo "⚠️  Failed to Enable (Installed but inactive):"
-    for plugin in "${failedToEnablePlugins[@]}"; do
+    for plugin in "${FAILED_TO_ENABLE_PLUGINS[@]}"; do
       echo "   - $plugin"
     done
   fi
 
   # Final check if everything was empty
-  if [[ ${#installedPlugins[@]} -eq 0 && ${#failedPlugins[@]} -eq 0 && ${#enabledPlugins[@]} -eq 0 ]]; then
+  if [[ ${#INSTALLED_PLUGINS[@]} -eq 0 && ${#FAILED_PLUGINS[@]} -eq 0 && ${#ENABLED_PLUGINS[@]} -eq 0 ]]; then
     echo "No actions were performed."
   fi
 
