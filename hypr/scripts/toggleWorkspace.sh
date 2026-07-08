@@ -3,9 +3,13 @@
 workspace_name="$1"
 shift
 
-if [[ -z "$workspace_name" ]]; then
-  echo "Usage: $0 <workspace_name> app1:window_name1 [app2:window_name2 ...]"
+function usage  {
+  echo "Usage: $0 <workspace_name> [modifier:]app1:window_name1 [[modifier:]app2:window_name2 ...]"
   exit 1
+}
+
+if [[ -z "$workspace_name" ]]; then
+  usage 
 fi
 
 if [[ -n "$(hyprctl monitors -j | jq -r ".[] | select(.specialWorkspace.name == \"special:$workspace_name\")")" ]]; then
@@ -18,16 +22,39 @@ hyprctl dispatch togglespecialworkspace "$workspace_name"
 
 # Process each app:window_name pair
 for pair in "$@"; do
-  app="${pair%%:*}"
+  IFS=":" read -ra pieces <<< "$pair"
+  num_pieces=${#pieces[@]}
+  command=""
+  class=""
+  case $num_pieces in
+    2)
+      command="app2unit -- ${pieces[0]} &>/dev/null"
+      class="${pieces[1]}"
+      ;;
+    3)
+      modifier="${pieces[0]}"
+      case "$modifier" in
+        "flatpak")
+          command="flatpak run ${pieces[1]} > /dev/null 2>&1 &"
+          class="${pieces[2]}"
+          ;;
+        *)
+          echo "Modifier $modifier not supported"
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      usage
+      ;;
+  esac
 
-  window_name="${pair#*:}"
-
-  if [[ -z "$(hyprctl clients -j | jq ".[] | select(.class==\"$window_name\").class")" ]]; then
-    echo "Starting $app"
-    app2unit -- "$app" &>/dev/null
+  if [[ -z "$(hyprctl clients -j | jq ".[] | select(.class==\"$class\").class")" ]]; then
+    echo "Starting $command"
+    eval "$command"
   else
-    echo "Moving $window_name"
-    hyprctl dispatch movetoworkspace "special:$workspace_name,class:$window_name"
+    echo "Moving $class"
+    hyprctl dispatch movetoworkspace "special:$workspace_name,class:$class"
   fi
 done
 
