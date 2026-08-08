@@ -190,4 +190,4 @@ hl.define_submap("global", function()
   hl.bind("SUPER + SHIFT + CTRL + K", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:show-keys toggle"))
 end)
 
-hl.dsp.submap("global")
+hl.dispatch(hl.dsp.submap("global"))
