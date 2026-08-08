@@ -15,9 +15,6 @@ hl.dsp.exec_cmd("cp -L --no-preserve=mode --update=none " .. hypr .. "/scheme/de
 
 safeReq("scheme.current")
 
--- Default monitor conf
--- hl.monitor({ "", "preferred", "auto", 1 })
-
 -- Configs
 safeReq("hyprland.env")
 safeReq("hyprland.general")
@@ -30,6 +27,6 @@ safeReq("hyprland.execs")
 safeReq("hyprland.rules")
 safeReq("hyprland.gestures")
 safeReq("hyprland.keybinds")
--- require("monitors")
+require("monitors")
 safeReq("workspaces")
 -- require("noctalia.noctalia-colors")
