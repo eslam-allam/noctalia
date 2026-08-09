@@ -183,7 +183,7 @@ hl.define_submap("global", function()
   hl.bind("SUPER + A", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:assistant-panel toggle"))
   hl.bind("SUPER + N", hl.dsp.exec_cmd("noctalia msg bar-toggle"))
 
-  hl.bind("SUPER + Tab", hl.dsp.exec_cmd("hyprctl dispatch scrolloverview:overview toggle"))
+  hl.bind("SUPER + Tab", hl.plugin.scrolloverview.overview("toggle all"))
 
   hl.bind("SUPER + SHIFT + CTRL + K", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:show-keys toggle"))
 end)
