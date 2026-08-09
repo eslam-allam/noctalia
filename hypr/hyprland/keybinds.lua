@@ -121,10 +121,10 @@ hl.define_submap("global", function()
   hl.bind("SUPER + CTRL + J", hl.dsp.window.move({ direction = "d" }))
 
   -- Resize Windows
-  hl.bind("SUPER + SHIFT + H", hl.dsp.window.resize({ x = -50, y = 0 }), { repeating = true })
-  hl.bind("SUPER + SHIFT + L", hl.dsp.window.resize({ x = 50, y = 0 }), { repeating = true })
-  hl.bind("SUPER + SHIFT + K", hl.dsp.window.resize({ x = 0, y = -50 }), { repeating = true })
-  hl.bind("SUPER + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 50 }), { repeating = true })
+  hl.bind("SUPER + SHIFT + H", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+  hl.bind("SUPER + SHIFT + L", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+  hl.bind("SUPER + SHIFT + K", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
+  hl.bind("SUPER + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
 
   hl.bind("SUPER + Minus", hl.dsp.layout("splitratio -0.1"), { repeating = true })
   hl.bind("SUPER + Equal", hl.dsp.layout("splitratio 0.1"), { repeating = true })
