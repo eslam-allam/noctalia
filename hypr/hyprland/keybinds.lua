@@ -142,7 +142,7 @@ hl.define_submap("global", function()
   hl.bind(v.kbWindowFullscreen, hl.dsp.window.fullscreen({ mode = 0 }))
   hl.bind(v.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = 1 }))
   hl.bind(v.kbToggleWindowFloating, hl.dsp.window.float({ action = "toggle" }))
-  hl.bind(v.kbCloseWindow, hl.dsp.window.kill())
+  hl.bind(v.kbCloseWindow, hl.dsp.window.close())
 
   -- Special workspace toggles
   hl.bind(v.kbSystemMonitor, hl.dsp.exec_cmd("app2unit -- gnome-system-monitor"))
