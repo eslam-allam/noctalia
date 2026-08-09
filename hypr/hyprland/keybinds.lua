@@ -1,10 +1,10 @@
 local v = require("variables")
 local wsaction = require("scripts.wsaction")
+local toggleWorkspace = require("scripts.toggleWorkspace")
 
 
 hl.define_submap("global", function()
   local launchOrMove = "~/.config/hypr/scripts/launchOrMove.sh"
-  local toggleWorkspace = "~/.config/hypr/scripts/toggleWorkspace.sh"
 
   -- ## Shell keybinds
   -- Launcher
@@ -67,7 +67,7 @@ hl.define_submap("global", function()
   hl.bind("CTRL + SUPER + mouse_up", hl.dsp.focus({ workspace = "+10" }))
 
   -- Toggle special workspace
-  hl.bind(v.kbToggleSpecialWs, hl.dsp.exec_cmd("hyprctl dispatch togglespecialworkspace special"))
+  hl.bind(v.kbToggleSpecialWs, toggleWorkspace.toggle("special"))
 
   -- Move window to workspace #
   hl.bind(v.kbMoveWinToWs .. " + 1", wsaction.action('move', 1))
@@ -148,9 +148,9 @@ hl.define_submap("global", function()
 
   -- Special workspace toggles
   hl.bind(v.kbSystemMonitor, hl.dsp.exec_cmd("app2unit -- gnome-system-monitor"))
-  hl.bind(v.kbMusic, hl.dsp.exec_cmd(toggleWorkspace .. " music"))
-  hl.bind(v.kbCommunication, hl.dsp.exec_cmd(toggleWorkspace .. " communication ferdium:ferdium"))
-  hl.bind(v.kbTodo, hl.dsp.exec_cmd(toggleWorkspace .. " todo"))
+  hl.bind(v.kbMusic, toggleWorkspace.toggle("music"))
+  hl.bind(v.kbCommunication, toggleWorkspace.toggle("communication", {"ferdium:ferdium"}))
+  hl.bind(v.kbTodo, toggleWorkspace.toggle("todo"))
 
   -- Apps
   hl.bind(v.kbTerminal, hl.dsp.exec_cmd("app2unit -- " .. v.terminal))
@@ -179,7 +179,7 @@ hl.define_submap("global", function()
   hl.bind("SUPER + V", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher clipboard"))
 
   -- User Defined
-  hl.bind("SUPER + T", hl.dsp.exec_cmd(toggleWorkspace .. " email flatpak:com.getmailspring.Mailspring:com.getmailspring.Mailspring"))
+  hl.bind("SUPER + T", toggleWorkspace.toggle("email", {"flatpak:com.getmailspring.Mailspring:com.getmailspring.Mailspring"}))
   hl.bind("SUPER + P", hl.dsp.exec_cmd("rofi-rbw -a copy -t password --keybindings Alt+u:copy:username,Alt+t:copy:totp"))
   hl.bind("SUPER + W", hl.dsp.exec_cmd("wayscriber --active"))
   hl.bind("SUPER + A", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:assistant-panel toggle"))
