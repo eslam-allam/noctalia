@@ -32,13 +32,13 @@ M.shadowRenderPower = 3
 
 -- Gaps
 M.workspaceGaps = 20
-M.windowGapsIn = 10
-M.windowGapsOut = 40
+M.windowGapsIn = 5
+M.windowGapsOut = 10
 M.singleWindowGapsOut = 20
 
 -- Window styling
 M.windowOpacity = 0.95
-M.windowRounding = 10
+M.windowRounding = 0
 
 M.windowBorderSize = 3
 -- M.activeWindowBorderColour = "rgba(" .. colors.primarye6 .. ")"
