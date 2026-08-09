@@ -25,7 +25,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("mpris-proxy")
 
 	-- Start shell
-	hl.exec_cmd("qs -c noctalia-shell")
+	hl.exec_cmd("noctalia")
 	hl.exec_cmd("blueman-applet")
 	hl.exec_cmd("systemctl --user start hypridle.service")
 

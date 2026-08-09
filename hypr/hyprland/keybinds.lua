@@ -6,27 +6,27 @@ local toggleWorkspace = require("scripts.toggleWorkspace")
 hl.define_submap("global", function()
   -- ## Shell keybinds
   -- Launcher
-  hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher toggle"), { release = true })
+  hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"), { release = true })
 
   -- Misc
-  hl.bind(v.kbSession, hl.dsp.exec_cmd("qs -c noctalia-shell ipc call sessionMenu toggle"))
-  hl.bind(v.kbClearNotifs, hl.dsp.exec_cmd("qs -c noctalia-shell ipc call notifications dismissAll"), { locked = true })
-  hl.bind(v.kbShowPanels, hl.dsp.exec_cmd("qs -c noctalia-shell ipc call settings toggle"))
-  hl.bind(v.kbLock, hl.dsp.exec_cmd("qs -c noctalia-shell ipc call lockScreen lock"))
+  hl.bind(v.kbSession, hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+  hl.bind(v.kbClearNotifs, hl.dsp.exec_cmd("noctalia msg notification-clear-active"), { locked = true })
+  hl.bind(v.kbShowPanels, hl.dsp.exec_cmd("noctalia msg settings-open"))
+  hl.bind(v.kbLock, hl.dsp.exec_cmd("noctalia msg session lock"))
 
   -- Media
-  hl.bind("CTRL + SUPER + Space", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media playPause"), { locked = true })
-  hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media playPause"), { locked = true })
-  hl.bind("XF86AudioPause", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media playPause"), { locked = true })
-  hl.bind("CTRL + SUPER + Equal", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media next"), { locked = true })
-  hl.bind("XF86AudioNext", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media next"), { locked = true })
-  hl.bind("CTRL + SUPER + Minus", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media previous"), { locked = true })
-  hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media previous"), { locked = true })
-  hl.bind("XF86AudioStop", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call media pause"), { locked = true })
+  hl.bind("CTRL + SUPER + Space", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
+  hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
+  hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
+  hl.bind("CTRL + SUPER + Equal", hl.dsp.exec_cmd("noctalia msg media next"), { locked = true })
+  hl.bind("XF86AudioNext", hl.dsp.exec_cmd("noctalia msg media next"), { locked = true })
+  hl.bind("CTRL + SUPER + Minus", hl.dsp.exec_cmd("noctalia msg media previous"), { locked = true })
+  hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"), { locked = true })
+  hl.bind("XF86AudioStop", hl.dsp.exec_cmd("noctalia msg media pause"), { locked = true })
 
   -- Kill/restart
-  hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("qs -c noctalia-shell kill"), { release = true })
-  hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("qs -c noctalia-shell kill; qs -c noctalia-shell"), { release = true })
+  hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("pkill noctalia"), { release = true })
+  hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("pkill noctalia && noctalia --daemon"), { release = true })
 
   -- Go to workspace #
   hl.bind(v.kbGoToWs .. " + 1", wsaction.action('focus', 1))
@@ -168,20 +168,20 @@ hl.define_submap("global", function()
   hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
   -- Volume
-  hl.bind("XF86AudioMute", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call volume muteOutput"), { locked = true })
-  hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call volume muteOutput"), { locked = true })
-  hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia-shell ipc call volume increase"), { locked = true, repeating = true })
-  hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia-shell ipc call volume decrease"), { locked = true, repeating = true })
+  hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
+  hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
+  hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia msg volume-up"), { locked = true, repeating = true })
+  hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia msg volume-down"), { locked = true, repeating = true })
 
   -- Clipboard and emoji picker
-  hl.bind("SUPER + V", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher clipboard"))
+  hl.bind("SUPER + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 
   -- User Defined
   hl.bind("SUPER + T", toggleWorkspace.toggle("email", {"flatpak:com.getmailspring.Mailspring:com.getmailspring.Mailspring"}))
   hl.bind("SUPER + P", hl.dsp.exec_cmd("rofi-rbw -a copy -t password --keybindings Alt+u:copy:username,Alt+t:copy:totp"))
   hl.bind("SUPER + W", hl.dsp.exec_cmd("wayscriber --active"))
   hl.bind("SUPER + A", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:assistant-panel toggle"))
-  hl.bind("SUPER + N", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call bar toggle"))
+  hl.bind("SUPER + N", hl.dsp.exec_cmd("noctalia msg bar-toggle"))
 
   hl.bind("SUPER + Tab", hl.dsp.exec_cmd("hyprctl dispatch scrolloverview:overview toggle"))
 

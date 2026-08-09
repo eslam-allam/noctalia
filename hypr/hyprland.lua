@@ -29,4 +29,6 @@ safeReq("hyprland.gestures")
 safeReq("hyprland.keybinds")
 require("monitors")
 safeReq("workspaces")
--- require("noctalia.noctalia-colors")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
