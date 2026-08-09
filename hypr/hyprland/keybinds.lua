@@ -4,8 +4,6 @@ local toggleWorkspace = require("scripts.toggleWorkspace")
 
 
 hl.define_submap("global", function()
-  local launchOrMove = "~/.config/hypr/scripts/launchOrMove.sh"
-
   -- ## Shell keybinds
   -- Launcher
   hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher toggle"), { release = true })
@@ -160,7 +158,7 @@ hl.define_submap("global", function()
   hl.bind(v.kbFileExplorer, hl.dsp.exec_cmd("app2unit -- " .. v.fileExplorer))
   hl.bind("SUPER + ALT + E", hl.dsp.exec_cmd("app2unit -- nemo"))
   hl.bind("CTRL + ALT + Escape", hl.dsp.exec_cmd("app2unit -- qps"))
-  hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd(launchOrMove .. " better-control"))
+  hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd("app2unit -- better-control"))
 
   -- Utilities
   hl.bind("Print", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-shot-and-record screenshot"), { locked = true })
