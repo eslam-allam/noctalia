@@ -3,7 +3,6 @@ hl.on("hyprland.start", function()
 
 	-- Keyring and auth
 	hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
-	hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 
 	-- Clipboard history
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
