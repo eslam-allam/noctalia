@@ -161,10 +161,10 @@ hl.define_submap("global", function()
   hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd("app2unit -- better-control"))
 
   -- Utilities
-  hl.bind("Print", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-shot-and-record screenshot"), { locked = true })
-  hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-shot-and-record screenshot"), { locked = true })
-  hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-shot-and-record record"))
-  hl.bind("SUPER + ALT + CTRL + R", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:screen-shot-and-record recordsound"))
+  hl.bind("Print", hl.dsp.exec_cmd("noctalia msg screenshot-region"), { locked = true })
+  hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"), { locked = true })
+  hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd("noctalia msg plugin alexander/screen-toolkit:service all recordMp4"))
+  hl.bind("SUPER + ALT + CTRL + R", hl.dsp.exec_cmd("noctalia msg plugin alexander/screen-toolkit:service all recordFullscreenMp4"))
   hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
   -- Volume
@@ -180,12 +180,9 @@ hl.define_submap("global", function()
   hl.bind("SUPER + T", toggleWorkspace.toggle("email", {"flatpak:com.getmailspring.Mailspring:com.getmailspring.Mailspring"}))
   hl.bind("SUPER + P", hl.dsp.exec_cmd("rofi-rbw -a copy -t password --keybindings Alt+u:copy:username,Alt+t:copy:totp"))
   hl.bind("SUPER + W", hl.dsp.exec_cmd("wayscriber --active"))
-  hl.bind("SUPER + A", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:assistant-panel toggle"))
   hl.bind("SUPER + N", hl.dsp.exec_cmd("noctalia msg bar-toggle"))
 
   hl.bind("SUPER + Tab", hl.plugin.scrolloverview.overview("toggle all"))
-
-  hl.bind("SUPER + SHIFT + CTRL + K", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call plugin:show-keys toggle"))
 end)
 
 hl.dispatch(hl.dsp.submap("global"))
