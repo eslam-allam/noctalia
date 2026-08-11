@@ -12,18 +12,28 @@ hl.config({
 })
 
 hl.gesture({ fingers = v.workspaceSwipeFingers, direction = "horizontal", action = "workspace" })
-hl.gesture({ fingers = v.gestureFingers, direction = "up", action = "special", target = "special" })
+hl.gesture({
+	fingers = v.workspaceSwipeFingers,
+	direction = "up",
+	action = {
+		start = function()
+			hl.dispatch(hl.dsp.workspace.toggle_special())
+		end,
+	},
+})
+
+local volume_gesture = function(change)
+	hl.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. math.abs(change) .. "%" .. (change < 0 and "-" or "+"))
+end
 hl.gesture({
 	fingers = v.gestureFingers,
-	direction = "down",
-	action = function()
-		hl.dsp.exec_cmd("caelestia toggle specialws")
-	end,
-})
-hl.gesture({
-	fingers = v.gestureFingersMore,
-	direction = "down",
-	action = function()
-		hl.dsp.exec_cmd("systemctl suspend-then-hibernate")
-	end,
+	direction = "vertical",
+	action = {
+		start = function(e)
+			volume_gesture(-0.25 * e.delta.y)
+		end,
+		update = function(e)
+			volume_gesture(-0.25 * e.delta.y)
+		end,
+	},
 })
