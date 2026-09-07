@@ -182,7 +182,11 @@ hl.define_submap("global", function()
   hl.bind("SUPER + W", hl.dsp.exec_cmd("wayscriber --active"))
   hl.bind("SUPER + N", hl.dsp.exec_cmd("noctalia msg bar-toggle"))
 
-  hl.bind("SUPER + Tab", hl.plugin.scrolloverview.overview("toggle all"))
+  if hl.plugin.scrolloverview ~= nil then
+    hl.bind("SUPER + Tab", hl.plugin.scrolloverview.overview("toggle all"))
+  else
+    hl.notification.create({text = "Scroll Overview plugin not available!!", timeout = 5000, color = "#FFFF00"})
+  end
 end)
 
 hl.dispatch(hl.dsp.submap("global"))
