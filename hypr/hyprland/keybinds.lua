@@ -188,7 +188,18 @@ hl.define_submap("global", function()
     hl.notification.create({text = "Scroll Overview plugin not available!!", timeout = 5000, color = "#FFFF00"})
   end
 
-  hl.bind("SUPER + ALT + D", hl.dsp.exec_cmd("hyprwhspr record toggle"))
+
+  hl.bind(
+      "SUPER + ALT + D",
+      hl.dsp.exec_cmd([[echo "start" > "$XDG_RUNTIME_DIR/hyprwhspr/recording_control"]])
+  )
+
+  hl.bind(
+      "SUPER + ALT + D",
+      hl.dsp.exec_cmd([[sleep 0.3; echo "stop" > "$XDG_RUNTIME_DIR/hyprwhspr/recording_control"]]),
+      { release = true }
+  )
+
 end)
 
 hl.dispatch(hl.dsp.submap("global"))
