@@ -187,6 +187,8 @@ hl.define_submap("global", function()
   else
     hl.notification.create({text = "Scroll Overview plugin not available!!", timeout = 5000, color = "#FFFF00"})
   end
+
+  hl.bind("SUPER + ALT + D", hl.dsp.exec_cmd("hyprwhspr record toggle"))
 end)
 
 hl.dispatch(hl.dsp.submap("global"))
