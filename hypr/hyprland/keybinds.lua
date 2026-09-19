@@ -170,8 +170,8 @@ hl.define_submap("global", function()
   -- Volume
   hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
   hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
-  hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia msg volume-up"), { locked = true, repeating = true })
-  hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; qs -c noctalia msg volume-down"), { locked = true, repeating = true })
+  hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; noctalia msg volume-up"), { locked = true, repeating = true })
+  hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; noctalia msg volume-down"), { locked = true, repeating = true })
 
   -- Clipboard and emoji picker
   hl.bind("SUPER + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
