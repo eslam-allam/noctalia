@@ -190,12 +190,12 @@ hl.define_submap("global", function()
 
 
   hl.bind(
-      "SUPER + ALT + D",
+      "SUPER + SHIFT + D",
       hl.dsp.exec_cmd([[echo "start" > "$XDG_RUNTIME_DIR/hyprwhspr/recording_control"]])
   )
 
   hl.bind(
-      "SUPER + ALT + D",
+      "SUPER + SHIFT + D",
       hl.dsp.exec_cmd([[sleep 0.3; echo "stop" > "$XDG_RUNTIME_DIR/hyprwhspr/recording_control"]]),
       { release = true }
   )
